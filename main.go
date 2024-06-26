@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	cfg := config.LoadConfig(".")
+	cfg := config.LoadConfig()
 
 	_, err := config.InitDB(cfg)
 	if err != nil {
@@ -24,6 +24,7 @@ func main() {
 	r := utils.SetUpRouter()
 	router.AuthRoutes(r, cfg)
 	router.HealthCheck(r)
+	router.ProjectRoutes(r)
 	r.Run(":8080")
 
 }

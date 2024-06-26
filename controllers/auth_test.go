@@ -37,7 +37,7 @@ type SignupTestSuite struct {
 func (s *SignupTestSuite) SetupTest() {
 
 	
-	cfg := config.LoadConfig("./")
+	cfg := config.LoadConfig()
 
 	db, err := config.InitDB(cfg)
 	if err != nil {
@@ -127,7 +127,7 @@ func (s *LoginTestSuite) SetupTest() {
 
 	os.Setenv("SECRET_KEY", "testkey")
 
-	cfg := config.LoadConfig("./")
+	cfg := config.LoadConfig()
 	db, err := config.InitDB(cfg)
 	if err != nil {
 		// Handle error
@@ -292,7 +292,7 @@ func (s *EmailVerficationLinkTestSuite) prepareTestContext(userBody []byte) (*gi
 
 func (s *EmailVerficationLinkTestSuite) SetupTest() {
 
-	cfg := config.LoadConfig("./")
+	cfg := config.LoadConfig()
 	db, err := config.InitDB(cfg)
 	if err != nil {
 		// Handle error

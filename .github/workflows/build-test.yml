@@ -33,7 +33,7 @@ jobs:
 
     - name: Docker Compose Up
       run: |
-        docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up -d
+        docker-compose up -d
 
     - name: Install Pulumi
       run: curl -fsSL https://get.pulumi.com | sh

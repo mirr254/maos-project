@@ -22,9 +22,9 @@ type ErrorResponse struct {
 
 func getCfg() *config.Config {
 	if os.Getenv("ENV") == "production" || os.Getenv("ENV") == "staging" {
-		return config.LoadConfig(".")
+		return config.LoadConfig()
 	}
-	return config.LoadConfig("./")
+	return config.LoadConfig()
 }
 
 func Signup( emailSender utils.EmailSender ) gin.HandlerFunc {
@@ -114,7 +114,7 @@ func SendEmailVerificationLink(emailSender utils.EmailSender) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		
 		var user models.Users
-		cfg := config.LoadConfig(".")
+		cfg := config.LoadConfig()
 
 		// check if user is logged in
 		cookie, err := c.Cookie("token")
@@ -186,7 +186,7 @@ func SendEmailVerificationLink(emailSender utils.EmailSender) gin.HandlerFunc {
 func VerifyEmail(c *gin.Context) {
 
 	var user models.Users
-	cfg := config.LoadConfig(".")
+	cfg := config.LoadConfig()
 
 	token := c.Query("token")
 	if token == "" {
@@ -219,7 +219,7 @@ func VerifyEmail(c *gin.Context) {
 func Login(c *gin.Context) {
 
 	var user models.Users
-	cfg := config.LoadConfig(".")
+	cfg := config.LoadConfig()
 
 	db, err := config.InitDB(cfg)
 	if err != nil {
@@ -283,7 +283,7 @@ func ResetPassword( emailSender utils.EmailSender  )  gin.HandlerFunc {
 
 	var user models.Users
 	logrus.Info("ENVVVVVVVVVVV: ", os.Getenv("ENV"))
-	cfg := config.LoadConfig(".")
+	cfg := config.LoadConfig()
 
 	db, err := config.InitDB(cfg)
 	if err != nil {
@@ -340,7 +340,7 @@ func ResetPassword( emailSender utils.EmailSender  )  gin.HandlerFunc {
 func UpdatePassword(c *gin.Context) {
 	
 	var user models.Users
-	cfg := config.LoadConfig(".")
+	cfg := getCfg()
 
 	db, err := config.InitDB(cfg)
 	if err != nil {
